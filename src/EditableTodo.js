@@ -17,46 +17,43 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    isEditing? setIsEditing(false):setIsEditing(true)
+    setIsEditing(edit => !edit)
   }
 
   /** Call remove fn passed to this. */
   function handleDelete() {
-    remove(todo.id)
-   }
+    remove(todo.id);
+  }
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) {
-    toggleEdit()
-    formData.id = todo.id
-    update(formData)
+    update({ ...formData, id:todo.id });
+    setIsEditing(false);      // data logic first then UI logic
   }
 
-  const editableTodoHTML =  isEditing ?
-    <TodoForm todo={todo} handleSave={handleSave}/>
-    :
+  const editableTodoHTML = isEditing ? (
+    <TodoForm todo={todo} handleSave={handleSave} />
+  ) : (
     <div className="mb-3">
       <div className="float-end text-sm-end">
         <button
-            className="EditableTodo-toggle btn-link btn btn-sm"
-            onClick={toggleEdit}>
+          className="EditableTodo-toggle btn-link btn btn-sm"
+          onClick={toggleEdit}
+        >
           Edit
         </button>
         <button
-            className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
-            onClick={handleDelete}>
+          className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
+          onClick={handleDelete}
+        >
           Del
         </button>
       </div>
-      <Todo todo={todo}/>
+      <Todo todo={todo} />
     </div>
-
-
-  return (
-      <div className="EditableTodo">
-        {editableTodoHTML}
-      </div>
   );
+
+  return <div className="EditableTodo">{editableTodoHTML}</div>;
 }
 
 export default EditableTodo;

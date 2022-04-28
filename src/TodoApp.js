@@ -21,8 +21,8 @@ function TodoApp({ initialTodos }) {
 
   /** add a new todo to list */
   function create(newTodo) {
-    newTodo.id = uuid();
-    setTodos((todos) => [...todos, newTodo]);
+    // newTodo.id = uuid();
+    setTodos((todos) => [...todos, { ...newTodo, id: uuid() }]);
   }
 
   /** update a todo with updatedTodo */
@@ -37,35 +37,29 @@ function TodoApp({ initialTodos }) {
     setTodos((todos) => todos.filter((todo) => todo.id !== id));
   }
 
-  const todoListHTML = todos.length ?
-    <EditableTodoList
-      todos={todos}
-      update={update}
-      remove={remove} />
-    :
+  const todoListHTML = todos.length ? (
+    <EditableTodoList todos={todos} update={update} remove={remove} />
+  ) : (
     <span className="text-muted">You have no todos.</span>
+  );
 
-  const topTodosHTML = todos.length ?
-      <section className="mb-4">
-        <h3>Top Todo</h3>
-        <TopTodo todos={todos} />
-      </section>
-    :
-    ""
-
+  const topTodosHTML = todos.length && (
+    <section className="mb-4">
+      <h3>Top Todo</h3>
+      <TopTodo todos={todos} />
+    </section>
+  );
 
   return (
     <main className="TodoApp">
       <div className="row">
-        <div className="col-md-6">
-          {todoListHTML}
-        </div>
+        <div className="col-md-6">{todoListHTML}</div>
 
         <div className="col-md-6">
           {topTodosHTML}
           <section>
             <h3 className="mb-3">Add Nü</h3>
-            <TodoForm todo={{}} handleSave={create} />
+            <TodoForm handleSave={create} />
           </section>
         </div>
       </div>

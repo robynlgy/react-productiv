@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 
+/** TODO: docstring */
+const initialFormData = {
+  title: "",
+  description: "",
+  priority: 1
+};
 
 /** Form for adding.
  *
@@ -10,15 +16,8 @@ import React, { useState } from "react";
  * { TodoApp, EditableTodo } -> TodoForm
  */
 
-function TodoForm({todo, handleSave}) {
-  const initialState = {
-                        title: todo.title || "",
-                        description:todo.description || "",
-                        priority: todo.priority || 1
-                      };
-
-  const [formData, setFormData] = useState(initialState);
-
+function TodoForm({todo = initialFormData, handleSave}) {
+  const [formData, setFormData] = useState(todo);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -33,7 +32,7 @@ function TodoForm({todo, handleSave}) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleSave(formData);
-    setFormData(initialState);
+    setFormData(initialFormData);
   }
 
   return (
