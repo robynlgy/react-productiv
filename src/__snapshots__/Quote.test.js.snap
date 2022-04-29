@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quote container matches snapshot 1`] = `
+<div>
+  <div>
+    <p
+      class="Quote-quote"
+    >
+      <i>
+        Test text
+         -
+        Testy Testman
+      </i>
+    </p>
+  </div>
+</div>
+`;

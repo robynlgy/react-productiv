@@ -1,11 +1,6 @@
 import { React, useState } from "react";
 import Quote from "./Quote";
-import axios from "axios";
-
-const initialQuote = {
-	text: "",
-	author: "",
-};
+import { getRandomQuote } from "./utils";
 
 /** Quote generator logic
  *
@@ -15,21 +10,16 @@ const initialQuote = {
  */
 
 function QuoteContainer() {
-	const [quote, setQuote] = useState(initialQuote);
+	const [quote, setQuote] = useState(null);
 	const [btnText, setBtnText] = useState(
-		"Click here for an inspirational quote!"
+		"Click here for an inspirational quøte!"
 	);
-	//logic to make ajax call and get quote object
-	//define function to get new quote
 
 	async function handleClick() {
-		const resp = await axios.get(
-			"https://inspo-quotes-api.herokuapp.com/quotes/random"
-		);
-
-		const newQuote = resp.data.quote;
+		const newQuote = await getRandomQuote();
 
 		setQuote(newQuote);
+		console.log("***click**");
 		setBtnText("Nu quote!");
 	}
 
