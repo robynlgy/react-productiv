@@ -22,8 +22,8 @@ describe("Quote container", function () {
 		expect(container.querySelector(".Quote-quote")).not.toBeInTheDocument();
 	});
 
-	it("renders quote and changes button text on first button click", function () {
-		utils.getRandomQuote.mockReturnValueOnce({
+	it("renders quote and changes button text on first button click", async function () {
+		await utils.getRandomQuote.mockReturnValueOnce({
 			text: "Test Quote",
 			author: "Test Author",
 		});
@@ -42,9 +42,10 @@ describe("Quote container", function () {
 		// test button text changed
 		// expect(result.queryByText("Test Quote -Text Author")).toBeInTheDocument();
 		// expect(result.queryByText("Nu quote!")).toBeInTheDocument();
-		expect(
-			result.queryByText("Click here for an inspirational quøte!")
-		).toBeInTheDocument();
+		expect(container.querySelector("button")).toContain("Nu quote!");
+		// expect(
+		// 	result.queryByText("Click here for an inspirational quøte!")
+		// ).toBeInTheDocument();
 	});
 
 	it("matches snapshot", function () {
