@@ -34,9 +34,14 @@ function QuoteContainer() {
 	}
 
 	return (
-		<div className="container">
+		<div className="container text-end pb-3">
 			<Quote quote={quote} />
-			<button onClick={handleClick}>{btnText}</button>
+			<button
+				onClick={handleClick}
+				style={{ color: "white", backgroundColor: "brown" }}
+			>
+				{btnText}
+			</button>
 		</div>
 	);
 }

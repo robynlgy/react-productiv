@@ -6,7 +6,9 @@ function Quote({ quote }) {
 	}
 	return (
 		<p>
-			{quote.text} -{quote.author}
+			<i>
+				{quote.text} -{quote.author}
+			</i>
 		</p>
 	);
 }
